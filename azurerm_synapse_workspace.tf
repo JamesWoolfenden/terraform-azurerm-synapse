@@ -6,6 +6,8 @@ resource "azurerm_synapse_workspace" "example" {
   sql_administrator_login              = "sqladminuser"
   sql_administrator_login_password     = "H@Sh1CoR3!"
 
+  data_exfiltration_protection_enabled = true
+  managed_virtual_network_enabled      = true
   customer_managed_key {
     key_versionless_id = azurerm_key_vault_key.example.versionless_id
     key_name           = "enckey"
@@ -36,4 +38,3 @@ resource "azurerm_synapse_workspace_aad_admin" "example" {
 
   depends_on = [azurerm_synapse_workspace_key.example]
 }
-

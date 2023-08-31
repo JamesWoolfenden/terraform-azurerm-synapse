@@ -9,6 +9,7 @@ resource "azurerm_key_vault_access_policy" "deployer" {
 }
 
 resource "azurerm_key_vault_key" "example" {
+  #checkov:skip=CKV_AZURE_112:expensive
   name         = "workspaceencryptionkey"
   key_vault_id = var.key_vault_id
   key_type     = "RSA"
@@ -17,6 +18,7 @@ resource "azurerm_key_vault_key" "example" {
     "unwrapKey",
     "wrapKey"
   ]
+  expiration_date = time_offset.pike.rfc3339
   depends_on = [
     azurerm_key_vault_access_policy.deployer
   ]
@@ -30,4 +32,8 @@ resource "azurerm_key_vault_access_policy" "workspace_policy" {
   key_permissions = [
     "Get", "WrapKey", "UnwrapKey"
   ]
+}
+
+resource "time_offset" "pike" {
+  offset_days = 7
 }

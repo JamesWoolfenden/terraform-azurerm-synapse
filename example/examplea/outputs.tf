@@ -1,3 +1,3 @@
 output "synapse" {
-    value = module.synapse
+  value = module.synapse
 }
