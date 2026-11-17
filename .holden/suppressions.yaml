@@ -1,0 +1,12 @@
+suppressions:
+  - policy_id: HLD_TF_073
+    resource_id: module.synapse
+    reason: "The module wraps one Synapse workspace and its optional pools, firewall rules and security policies (alerting, auditing, vulnerability assessment); these share the workspace lifecycle and CMK, so splitting them into separate modules would not reduce what a secure deployment needs."
+
+  - policy_id: HLD_TF_078
+    resource_id: module.synapse
+    reason: "Resource count comes from the optional SQL/Spark pools and their security policies; all are count/for_each gated and cohesive with the workspace."
+
+  - policy_id: HLD_TF_026
+    resource_id: module.synapse
+    reason: "The example deliberately consumes the module under test from the repository root."
